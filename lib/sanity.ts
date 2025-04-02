@@ -150,6 +150,11 @@ export async function getAllTracks() {
       category,
       coverArt,
       releaseDate,
+      audioFile {
+        asset-> {
+          url
+        }
+      },
       "album": album->{
         title,
         slug
@@ -164,14 +169,20 @@ export async function getTrackBySlug(slug: string) {
       _id,
       title,
       slug,
+      releaseDate,
       category,
       coverArt,
-      releaseDate,
+      audioFile {
+        asset-> {
+          url
+        }
+      },
+      embedCode,
       description,
       instruments,
       collaborators,
-      audioFile,
-      embedCode,
+      featured,
+      trackNumber,
       "album": album->{
         title,
         slug,

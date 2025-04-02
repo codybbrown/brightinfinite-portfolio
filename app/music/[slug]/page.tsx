@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import type { Track } from "@/music.types";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
+import { AudioPlayer } from "@/components/AudioPlayer";
 
 interface MusicPageProps {
   params: {
@@ -63,9 +64,7 @@ export default async function MusicPage({ params }: MusicPageProps) {
         <div className="space-y-4">
           <h2 className="text-2xl font-semibold">Listen</h2>
           <div className="bg-muted p-4 rounded-lg">
-            <audio controls className="w-full" src={track.audioFile.asset.url}>
-              Your browser does not support the audio element.
-            </audio>
+            <AudioPlayer audioFile={track.audioFile} title={track.title} />
           </div>
         </div>
       )}
