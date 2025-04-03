@@ -23,15 +23,32 @@ export async function getAllMusic() {
     slug,
     releaseDate,
     category,
-    coverArt,
-    audioFile,
+    coverArt {
+      _type,
+      asset-> {
+        _id,
+        url
+      }
+    },
+    audioFile {
+      asset-> {
+        url
+      }
+    },
     embedCode,
     instruments,
     featured,
     album->{
       _id,
       title,
-      slug
+      slug,
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      }
     }
   }`);
 }
@@ -43,13 +60,30 @@ export async function getFeaturedMusic() {
     slug,
     releaseDate,
     category,
-    coverArt,
-    audioFile,
+    coverArt {
+      _type,
+      asset-> {
+        _id,
+        url
+      }
+    },
+    audioFile {
+      asset-> {
+        url
+      }
+    },
     featured,
     album->{
       _id,
       title,
-      slug
+      slug,
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      }
     }
   }`);
 }
@@ -62,8 +96,18 @@ export async function getMusicBySlug(slug: string) {
       slug,
       releaseDate,
       category,
-      coverArt,
-      audioFile,
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
+      audioFile {
+        asset-> {
+          url
+        }
+      },
       embedCode,
       description,
       instruments,
@@ -74,7 +118,13 @@ export async function getMusicBySlug(slug: string) {
         _id,
         title,
         slug,
-        coverArt,
+        coverArt {
+          _type,
+          asset-> {
+            _id,
+            url
+          }
+        },
         releaseDate
       }
     }`,
@@ -84,7 +134,37 @@ export async function getMusicBySlug(slug: string) {
 
 export async function getMusicByCategory(category: string) {
   return client.fetch(
-    `*[_type == "music" && category == $category] | order(releaseDate desc)`,
+    `*[_type == "music" && category == $category] | order(releaseDate desc) {
+      _id,
+      title,
+      slug,
+      releaseDate,
+      category,
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
+      audioFile {
+        asset-> {
+          url
+        }
+      },
+      album->{
+        _id,
+        title,
+        slug,
+        coverArt {
+          _type,
+          asset-> {
+            _id,
+            url
+          }
+        }
+      }
+    }`,
     { category }
   );
 }
@@ -96,7 +176,13 @@ export async function getAllAlbums() {
       _id,
       title,
       slug,
-      coverArt,
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
       releaseDate,
       description,
       "trackCount": count(*[_type == "music" && references(^._id)])
@@ -110,7 +196,13 @@ export async function getAlbumBySlug(slug: string) {
       _id,
       title,
       slug,
-      coverArt,
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
       releaseDate,
       description,
       "tracks": *[_type == "music" && references(^._id)] | order(trackNumber asc) {
@@ -118,10 +210,27 @@ export async function getAlbumBySlug(slug: string) {
         title,
         slug,
         category,
-        coverArt,
+        coverArt {
+          _type,
+          asset-> {
+            _id,
+            url
+          }
+        },
         trackNumber,
-        audioFile,
-        embedCode
+        audioFile {
+          asset-> {
+            url
+          }
+        },
+        embedCode,
+        "albumCoverArt": ^.coverArt {
+          _type,
+          asset-> {
+            _id,
+            url
+          }
+        }
       }
     }`,
     { slug }
@@ -135,8 +244,30 @@ export async function getFeaturedTracks() {
       title,
       slug,
       category,
-      coverArt,
-      releaseDate
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
+      releaseDate,
+      audioFile {
+        asset-> {
+          url
+        }
+      },
+      "albumCoverArt": album->coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
+      album->{
+        title,
+        slug
+      }
     }`
   );
 }
@@ -148,14 +279,27 @@ export async function getAllTracks() {
       title,
       slug,
       category,
-      coverArt,
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
       releaseDate,
       audioFile {
         asset-> {
           url
         }
       },
-      "album": album->{
+      "albumCoverArt": album->coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
+      album->{
         title,
         slug
       }
@@ -171,7 +315,13 @@ export async function getTrackBySlug(slug: string) {
       slug,
       releaseDate,
       category,
-      coverArt,
+      coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
       audioFile {
         asset-> {
           url
@@ -183,10 +333,16 @@ export async function getTrackBySlug(slug: string) {
       collaborators,
       featured,
       trackNumber,
-      "album": album->{
+      "albumCoverArt": album->coverArt {
+        _type,
+        asset-> {
+          _id,
+          url
+        }
+      },
+      album->{
         title,
-        slug,
-        coverArt
+        slug
       }
     }`,
     { slug }

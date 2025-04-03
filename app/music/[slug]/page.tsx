@@ -6,6 +6,7 @@ import type { Track } from "@/music.types";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { AudioPlayer } from "@/components/AudioPlayer";
+import { urlFor } from "@/lib/sanity";
 
 interface MusicPageProps {
   params: {
@@ -20,6 +21,17 @@ export default async function MusicPage({ params }: MusicPageProps) {
   if (!track) {
     notFound();
   }
+
+  // Use album cover art if available, otherwise use track cover art
+  const coverArt = track.album?.coverArt || track.coverArt;
+  const hasCoverArt =
+    coverArt &&
+    coverArt._type === "image" &&
+    coverArt.asset &&
+    coverArt.asset._id;
+  const imageUrl = hasCoverArt
+    ? urlFor(coverArt).url()
+    : "/images/placeholder-music.jpg";
 
   return (
     <div className="space-y-8">
@@ -36,10 +48,11 @@ export default async function MusicPage({ params }: MusicPageProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <div className="relative aspect-square">
           <Image
-            src={track.coverArt?.asset?.url || "/images/placeholder-music.jpg"}
+            src={imageUrl}
             alt={track.title}
             fill
             className="object-cover rounded-lg"
+            priority
           />
         </div>
         <div className="space-y-4">

@@ -1,5 +1,16 @@
 import type { PortableTextBlock } from "@portabletext/types";
 
+interface SanityImageAsset {
+  _id: string;
+  _type: string;
+  url: string;
+}
+
+interface SanityImage {
+  _type: string;
+  asset: SanityImageAsset;
+}
+
 export interface Track {
   _id: string;
   title: string;
@@ -7,11 +18,8 @@ export interface Track {
     current: string;
   };
   category: "composition" | "performance" | "production" | "recording";
-  coverArt: {
-    asset: {
-      url: string;
-    };
-  };
+  coverArt?: SanityImage;
+  albumCoverArt?: SanityImage;
   releaseDate: string;
   description?: PortableTextBlock[];
   instruments?: string[];
@@ -28,11 +36,7 @@ export interface Track {
     slug: {
       current: string;
     };
-    coverArt?: {
-      asset: {
-        url: string;
-      };
-    };
+    coverArt?: SanityImage;
   };
   trackNumber?: number;
 }
@@ -43,11 +47,7 @@ export interface Album {
   slug: {
     current: string;
   };
-  coverArt: {
-    asset: {
-      url: string;
-    };
-  };
+  coverArt?: SanityImage;
   releaseDate: string;
   description?: PortableTextBlock[];
   trackCount?: number;
