@@ -58,7 +58,53 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
           <h2 className="text-2xl font-semibold">Tracks</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {album.tracks.map((track) => (
-              <TrackCard key={track._id} track={track} />
+              <div key={track._id} className="space-y-2">
+                <TrackCard track={track} />
+                <div className="text-xs text-muted-foreground space-y-1">
+                  {track.genres && track.genres.length > 0 && (
+                    <div>
+                      <span className="font-medium">Genres: </span>
+                      {track.genres
+                        .filter((genre) => genre && genre.name)
+                        .map((genre, index, filteredArray) => (
+                          <span key={genre._id}>
+                            {genre.name}
+                            {index < filteredArray.length - 1 ? ", " : ""}
+                          </span>
+                        ))}
+                    </div>
+                  )}
+                  {track.instruments && track.instruments.length > 0 && (
+                    <div>
+                      <span className="font-medium">Instruments: </span>
+                      {track.instruments
+                        .filter((instrument) => instrument && instrument.name)
+                        .map((instrument, index, filteredArray) => (
+                          <span key={instrument._id}>
+                            {instrument.name}
+                            {index < filteredArray.length - 1 ? ", " : ""}
+                          </span>
+                        ))}
+                    </div>
+                  )}
+                  {track.collaborators && track.collaborators.length > 0 && (
+                    <div>
+                      <span className="font-medium">Collaborators: </span>
+                      {track.collaborators
+                        .filter(
+                          (collab) =>
+                            collab && collab.artist && collab.artist.name
+                        )
+                        .map((collab, index, filteredArray) => (
+                          <span key={collab.artist._id}>
+                            {collab.artist.name} ({collab.role})
+                            {index < filteredArray.length - 1 ? ", " : ""}
+                          </span>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         </div>

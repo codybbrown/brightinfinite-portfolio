@@ -22,8 +22,23 @@ export interface Track {
   albumCoverArt?: SanityImage;
   releaseDate: string;
   description?: PortableTextBlock[];
-  instruments?: string[];
-  collaborators?: string[];
+  instruments?: {
+    _id: string;
+    name: string;
+    category: string;
+  }[];
+  collaborators?: {
+    artist: {
+      _id: string;
+      name: string;
+      photo?: SanityImage;
+    };
+    role: string;
+  }[];
+  genres?: {
+    _id: string;
+    name: string;
+  }[];
   audioFile?: {
     asset: {
       url: string;

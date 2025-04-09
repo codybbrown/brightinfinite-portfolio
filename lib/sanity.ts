@@ -224,6 +224,30 @@ export async function getAlbumBySlug(slug: string) {
           }
         },
         embedCode,
+        description,
+        instruments[]->{
+          _id,
+          name,
+          category
+        },
+        collaborators[]{
+          artist->{
+            _id,
+            name,
+            photo {
+              _type,
+              asset-> {
+                _id,
+                url
+              }
+            }
+          },
+          role
+        },
+        genres[]->{
+          _id,
+          name
+        },
         "albumCoverArt": ^.coverArt {
           _type,
           asset-> {

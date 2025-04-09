@@ -27,6 +27,18 @@ export default defineType({
       description: 'The album this track belongs to',
     }),
     defineField({
+      name: 'artists',
+      title: 'Artists',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'artist'}],
+        },
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'releaseDate',
       title: 'Release Date',
       type: 'date',
@@ -53,6 +65,21 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'genres',
+      title: 'Genres',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'genre'}],
+          options: {
+            filter: '!(_id in path("drafts.**"))',
+          },
+        },
+      ],
+      validation: (Rule) => Rule.unique(),
+    }),
+    defineField({
       name: 'audioFile',
       title: 'Audio File',
       type: 'file',
@@ -77,8 +104,17 @@ export default defineType({
       name: 'instruments',
       title: 'Instruments',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'instrument'}],
+          options: {
+            filter: '!(_id in path("drafts.**"))',
+          },
+        },
+      ],
       description: 'List of instruments used in this track',
+      validation: (Rule) => Rule.unique(),
     }),
     defineField({
       name: 'collaborators',
@@ -88,7 +124,7 @@ export default defineType({
         {
           type: 'object',
           fields: [
-            {name: 'name', type: 'string', title: 'Name'},
+            {name: 'artist', type: 'reference', to: [{type: 'artist'}]},
             {name: 'role', type: 'string', title: 'Role'},
           ],
         },
