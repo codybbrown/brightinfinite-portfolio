@@ -21,6 +21,7 @@ export default async function Home() {
               projects, and creative works. From compositions to productions,
               discover the intersection of technology and artistry.
             </p>
+
             <div className="mt-6 flex items-center justify-center gap-x-4">
               <Link href="/music">
                 <Button size="default">Explore Music</Button>
