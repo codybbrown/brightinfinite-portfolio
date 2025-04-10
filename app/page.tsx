@@ -26,7 +26,7 @@ export default async function Home() {
       <section className="py-8 sm:py-10">
         <div className="container space-y-8">
           <PortfolioSectionCard
-            title="Music"
+            title="MUSIC"
             items={featuredTracks}
             description="Original compositions produced, mixed, and mastered by Cody Brown."
           />
