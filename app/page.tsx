@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-12 sm:py-16">
+      <section className="relative py-4 sm:py-4">
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -28,7 +28,8 @@ export default async function Home() {
           <PortfolioSectionCard
             title="Music"
             items={featuredTracks}
-            description="Original compositions and productions spanning various genres and styles."
+            description="Original compositions programmed, produced, mixed, and mastered by Cody Brown."
+            // description="Original compositions, production, mixing, and mastering. spanning various genres and styles."
           />
         </div>
       </section>

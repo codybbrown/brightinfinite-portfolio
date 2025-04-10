@@ -24,14 +24,14 @@ export function PortfolioSectionCard({
           </div>
         </div>
 
-        {/* Right Column - Section Title */}
-        <div className="w-full md:w-1/3 bg-emerald-600 p-8 flex flex-col justify-center items-center text-center">
+        {/* Right Column - Section Title TRY INDIGO CLOWN */}
+        <div className="w-full md:w-1/3 bg-lime-600 p-8 flex flex-col justify-center items-center text-center">
           <h2 className="text-9xl md:text-8xl text-white font-bold tracking-tight mb-4">
             {title}
           </h2>
-          <div className="flex flex-col items-center justify-center bg-white  italic p-4 rounded-lg">
+          <div className="flex flex-col items-center justify-center bg-white  p-4 rounded-lg">
             {description && (
-              <p className="text-black max-w-xs">{description}</p>
+              <p className="text-lime-600 max-w-xs font-bold">{description}</p>
             )}
           </div>
         </div>
