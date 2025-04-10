@@ -28,8 +28,7 @@ export default async function Home() {
           <PortfolioSectionCard
             title="Music"
             items={featuredTracks}
-            description="Original compositions programmed, produced, mixed, and mastered by Cody Brown."
-            // description="Original compositions, production, mixing, and mastering. spanning various genres and styles."
+            description="Original compositions produced, mixed, and mastered by Cody Brown."
           />
         </div>
       </section>
