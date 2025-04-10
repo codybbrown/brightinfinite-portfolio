@@ -22,8 +22,8 @@ export default async function MusicPage({ params }: MusicPageProps) {
     notFound();
   }
 
-  // Use album cover art if available, otherwise use track cover art
-  const coverArt = track.album?.coverArt || track.coverArt;
+  // Use track cover art if available, otherwise use album cover art
+  const coverArt = track.coverArt || track.album?.coverArt;
   const hasCoverArt =
     coverArt &&
     coverArt._type === "image" &&
@@ -55,20 +55,89 @@ export default async function MusicPage({ params }: MusicPageProps) {
             priority
           />
         </div>
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold">{track.title}</h1>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span className="capitalize">{track.category}</span>
-            <span>•</span>
-            <span>
-              Released {new Date(track.releaseDate).toLocaleDateString()}
-            </span>
-          </div>
-          {track.description && (
-            <div className="prose prose-sm max-w-none">
-              <PortableText value={track.description} />
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <h1 className="text-4xl font-bold">{track.title}</h1>
+            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <span className="capitalize">{track.category}</span>
+              <span>•</span>
+              <span>
+                Released {new Date(track.releaseDate).toLocaleDateString()}
+              </span>
             </div>
-          )}
+            {track.description && (
+              <div className="prose prose-sm max-w-none">
+                <PortableText value={track.description} />
+              </div>
+            )}
+          </div>
+
+          {/* Track Details */}
+          <div className="space-y-1 pt-4 border-t">
+            {/* Basic Information */}
+            {track.trackNumber && (
+              <div className="text-sm text-muted-foreground">
+                Track #: {track.trackNumber}
+              </div>
+            )}
+            {track.featured && (
+              <div className="text-sm text-muted-foreground">
+                Status: Featured
+              </div>
+            )}
+            {track.album && (
+              <div className="text-sm text-muted-foreground">
+                Album: {track.album.title}
+              </div>
+            )}
+
+            {/* Genres */}
+            {track.genres && track.genres.length > 0 && (
+              <div className="text-sm text-muted-foreground">
+                Genres:{" "}
+                {track.genres
+                  .filter((genre) => genre && genre.name)
+                  .map((genre, index, array) => (
+                    <span key={genre._id}>
+                      {genre.name}
+                      {index < array.length - 1 ? ", " : ""}
+                    </span>
+                  ))}
+              </div>
+            )}
+
+            {/* Instruments */}
+            {track.instruments && track.instruments.length > 0 && (
+              <div className="text-sm text-muted-foreground">
+                Instruments:{" "}
+                {track.instruments
+                  .filter((instrument) => instrument && instrument.name)
+                  .map((instrument, index, array) => (
+                    <span key={instrument._id}>
+                      {instrument.name}
+                      {index < array.length - 1 ? ", " : ""}
+                    </span>
+                  ))}
+              </div>
+            )}
+
+            {/* Collaborators */}
+            {track.collaborators && track.collaborators.length > 0 && (
+              <div className="text-sm text-muted-foreground">
+                Collaborators:{" "}
+                {track.collaborators
+                  .filter(
+                    (collab) => collab && collab.artist && collab.artist.name
+                  )
+                  .map((collab, index, array) => (
+                    <span key={collab.artist._id}>
+                      {collab.artist.name} ({collab.role})
+                      {index < array.length - 1 ? ", " : ""}
+                    </span>
+                  ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -81,33 +150,6 @@ export default async function MusicPage({ params }: MusicPageProps) {
           </div>
         </div>
       )}
-
-      {/* Track Details */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Details</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {track.instruments && track.instruments.length > 0 && (
-            <div>
-              <h3 className="font-medium mb-2">Instruments</h3>
-              <ul className="list-disc list-inside text-muted-foreground">
-                {track.instruments.map((instrument) => (
-                  <li key={instrument}>{instrument}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {track.collaborators && track.collaborators.length > 0 && (
-            <div>
-              <h3 className="font-medium mb-2">Collaborators</h3>
-              <ul className="list-disc list-inside text-muted-foreground">
-                {track.collaborators.map((collaborator) => (
-                  <li key={collaborator}>{collaborator}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 }

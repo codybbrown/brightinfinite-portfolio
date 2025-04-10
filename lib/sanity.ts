@@ -353,20 +353,42 @@ export async function getTrackBySlug(slug: string) {
       },
       embedCode,
       description,
-      instruments,
-      collaborators,
+      instruments[]->{
+        _id,
+        name,
+        category
+      },
+      collaborators[]{
+        artist->{
+          _id,
+          name,
+          photo {
+            _type,
+            asset-> {
+              _id,
+              url
+            }
+          }
+        },
+        role
+      },
+      genres[]->{
+        _id,
+        name
+      },
       featured,
       trackNumber,
-      "albumCoverArt": album->coverArt {
-        _type,
-        asset-> {
-          _id,
-          url
-        }
-      },
       album->{
+        _id,
         title,
-        slug
+        slug,
+        coverArt {
+          _type,
+          asset-> {
+            _id,
+            url
+          }
+        }
       }
     }`,
     { slug }
