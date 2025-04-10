@@ -1,8 +1,6 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { getFeaturedTracks } from "@/lib/sanity";
-import { TrackCard } from "@/components/TrackCard";
 import type { Track } from "@/music.types";
+import { PortfolioSectionCard } from "@/components/PortfolioSectionCard";
 
 export default async function Home() {
   const featuredTracks = await getFeaturedTracks();
@@ -14,46 +12,24 @@ export default async function Home() {
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Creative Portfolio
+              Portfolio
             </h1>
             <p className="mt-4 text-base leading-7 text-muted-foreground">
-              Explore my diverse collection of music, software development
-              projects, and creative works. From compositions to productions,
-              discover the intersection of technology and artistry.
+              A collection of my creative and technical works across various
+              disciplines.
             </p>
-
-            <div className="mt-6 flex items-center justify-center gap-x-4">
-              <Link href="/music">
-                <Button size="default">Explore Music</Button>
-              </Link>
-              <Link href="/album">
-                <Button variant="outline" size="default">
-                  View Albums
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Music Section */}
+      {/* Portfolio Sections */}
       <section className="py-8 sm:py-10">
-        <div className="container">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold tracking-tight">
-              Featured Music
-            </h2>
-            <Link href="/music">
-              <Button variant="outline" size="sm">
-                View All
-              </Button>
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {featuredTracks.map((track: Track) => (
-              <TrackCard key={track._id} track={track} />
-            ))}
-          </div>
+        <div className="container space-y-8">
+          <PortfolioSectionCard
+            title="Music"
+            items={featuredTracks}
+            description="Original compositions and productions spanning various genres and styles."
+          />
         </div>
       </section>
     </div>
