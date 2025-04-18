@@ -10,6 +10,7 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "Music", href: "/music" },
   { name: "Albums", href: "/album" },
+  { name: "Testing", href: "/testing" },
 ];
 
 export function Header() {
