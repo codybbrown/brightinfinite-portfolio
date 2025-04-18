@@ -33,7 +33,9 @@ export function Header() {
                 className="h-16 w-auto"
                 priority
               />
-              <span className="ml-4 text-xl font-bold">BrightInfinite</span>
+              <span className="ml-4 text-xl font-bold">
+                BrightInfinite Productions
+              </span>
             </Link>
           </div>
 
@@ -48,13 +50,13 @@ export function Header() {
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <Link
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-lime-500 p-6 no-underline outline-none focus:shadow-md text-white"
                             href="/"
                           >
-                            <div className="mb-2 mt-4 text-lg font-medium">
+                            <div className="mb-2 mt-4 text-lg font-bold text-white">
                               Featured Tracks
                             </div>
-                            <p className="text-sm leading-tight text-muted-foreground">
+                            <p className="text-sm leading-tight text-white font-bold">
                               Check out our latest and greatest music releases.
                             </p>
                           </Link>
@@ -63,13 +65,13 @@ export function Header() {
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-lime-300"
                             href="/album"
                           >
-                            <div className="text-sm font-medium leading-none">
+                            <div className="text-sm font-medium leading-none group-hover:text-white group-hover:font-bold">
                               Albums
                             </div>
-                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-white group-hover:font-bold">
                               Browse through our complete collection of albums.
                             </p>
                           </Link>
@@ -78,13 +80,13 @@ export function Header() {
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-lime-300"
                             href="/music"
                           >
-                            <div className="text-sm font-medium leading-none">
+                            <div className="text-sm font-medium leading-none group-hover:text-white group-hover:font-bold">
                               Singles
                             </div>
-                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-white group-hover:font-bold">
                               Discover our latest single releases.
                             </p>
                           </Link>
@@ -100,14 +102,14 @@ export function Header() {
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-yellow-600"
                             href="/bio"
                           >
-                            <div className="text-sm font-medium leading-none">
+                            <div className="text-sm font-medium leading-none group-hover:text-white group-hover:font-bold">
                               Biography
                             </div>
-                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                              Learn more about our story and journey.
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-white group-hover:font-bold">
+                              Learn more about our people and their stories.
                             </p>
                           </Link>
                         </NavigationMenuLink>
@@ -115,13 +117,13 @@ export function Header() {
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-yellow-600"
                             href="/contact"
                           >
-                            <div className="text-sm font-medium leading-none">
+                            <div className="text-sm font-medium leading-none group-hover:text-white group-hover:font-bold">
                               Contact
                             </div>
-                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-white group-hover:font-bold">
                               Get in touch with us.
                             </p>
                           </Link>
