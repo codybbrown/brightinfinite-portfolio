@@ -24,7 +24,7 @@ export default function TestingPage() {
                   <NavigationMenuLink asChild>
                     <Link
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      href="/"
+                      href="/music"
                     >
                       <div className="mb-2 mt-4 text-lg font-medium">
                         Featured Tracks
@@ -39,7 +39,7 @@ export default function TestingPage() {
                   <NavigationMenuLink asChild>
                     <Link
                       className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                      href="/"
+                      href="/album"
                     >
                       <div className="text-sm font-medium leading-none">
                         Albums
@@ -54,7 +54,7 @@ export default function TestingPage() {
                   <NavigationMenuLink asChild>
                     <Link
                       className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                      href="/"
+                      href="/music"
                     >
                       <div className="text-sm font-medium leading-none">
                         Singles
@@ -76,7 +76,7 @@ export default function TestingPage() {
                   <NavigationMenuLink asChild>
                     <Link
                       className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                      href="/"
+                      href="/bio"
                     >
                       <div className="text-sm font-medium leading-none">
                         Biography
@@ -91,7 +91,7 @@ export default function TestingPage() {
                   <NavigationMenuLink asChild>
                     <Link
                       className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                      href="/"
+                      href="/contact"
                     >
                       <div className="text-sm font-medium leading-none">
                         Contact
@@ -106,7 +106,7 @@ export default function TestingPage() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
+            <Link href="/store" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Store
               </NavigationMenuLink>

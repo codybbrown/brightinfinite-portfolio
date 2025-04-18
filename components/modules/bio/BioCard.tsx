@@ -1,69 +1,64 @@
+import { Artist } from "@/types/music.types";
 import Image from "next/image";
-import { Bio } from "../../../types/bio.types";
+import { PortableText } from "@portabletext/react";
 
 interface BioCardProps {
-  bio: Bio;
+  bio: Artist;
 }
 
 export default function BioCard({ bio }: BioCardProps) {
+  // The photo URL is already processed by the Sanity query
+  const imageUrl = bio.photo?.url || "/images/placeholder-profile.jpg";
+
   return (
-    <div className="max-w-2xl mx-auto bg-card rounded-lg shadow-lg overflow-hidden">
-      <div className="relative h-64 w-full">
-        <Image
-          src={bio.image.url}
-          alt={bio.image.alt}
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
-
+    <div className="bg-card rounded-lg shadow-lg overflow-hidden">
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-2">{bio.name}</h1>
-        <h2 className="text-xl text-muted-foreground mb-4">{bio.title}</h2>
-
-        <p className="text-gray-600 mb-6">{bio.description}</p>
-
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-2">Skills</h3>
-          <div className="flex flex-wrap gap-2">
-            {bio.skills.map((skill, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
-              >
-                {skill}
-              </span>
-            ))}
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="relative w-full md:w-1/3 aspect-square">
+            <Image
+              src={imageUrl}
+              alt={bio.name}
+              fill
+              className="object-cover rounded-lg"
+              priority
+            />
           </div>
-        </div>
-
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-2">Experience</h3>
-          <div className="space-y-4">
-            {bio.experience.map((exp, index) => (
-              <div key={index} className="border-l-2 border-primary pl-4">
-                <h4 className="font-medium">{exp.title}</h4>
-                <p className="text-muted-foreground">{exp.company}</p>
-                <p className="text-sm text-muted-foreground">{exp.period}</p>
-                <p className="mt-2 text-gray-600">{exp.description}</p>
+          <div className="flex-1">
+            <h2 className="text-2xl font-bold mb-2">{bio.name}</h2>
+            <div className="prose prose-invert max-w-none mb-6">
+              <PortableText value={bio.bio} />
+            </div>
+            {bio.instruments && bio.instruments.length > 0 && (
+              <div className="mb-6">
+                <h4 className="font-semibold mb-2">Instruments</h4>
+                <div className="flex flex-wrap gap-2">
+                  {bio.instruments.map((instrument) => (
+                    <span
+                      key={instrument.id}
+                      className="px-3 py-1 bg-primary/10 rounded-full text-sm"
+                    >
+                      {instrument.name}
+                    </span>
+                  ))}
+                </div>
               </div>
-            ))}
+            )}
+            {bio.genres && bio.genres.length > 0 && (
+              <div>
+                <h4 className="font-semibold mb-2">Genres</h4>
+                <div className="flex flex-wrap gap-2">
+                  {bio.genres.map((genre) => (
+                    <span
+                      key={genre.id}
+                      className="px-3 py-1 bg-primary/10 rounded-full text-sm"
+                    >
+                      {genre.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-
-        <div className="flex gap-4">
-          {bio.socialLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors"
-            >
-              {link.platform}
-            </a>
-          ))}
         </div>
       </div>
     </div>

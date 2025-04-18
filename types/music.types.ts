@@ -1,51 +1,80 @@
 // types/music.d.ts
+import {
+  SanityImage,
+  SanityFile,
+  SanitySlug,
+  SanityPortableText,
+  SanityDocument,
+} from "./sanity.types";
+
 export interface Collaborator {
   name: string;
   role: string;
 }
 
-export interface Album {
-  _id: string;
-  title: string;
-  slug: {
-    current: string;
+export interface Artist extends SanityDocument {
+  _type: "artist";
+  name: string;
+  slug: SanitySlug;
+  bio: SanityPortableText;
+  photo?: {
+    url: string;
+    alt?: string;
   };
-  releaseDate: string;
-  coverArt?: {
-    _type: "image";
-    asset: {
-      _ref: string;
-    };
-  };
-  description?: any[];
+  instruments?: {
+    id: string;
+    name: string;
+  }[];
+  genres?: {
+    id: string;
+    name: string;
+  }[];
 }
 
-export interface MusicItem {
-  _id: string;
+export interface Album extends SanityDocument {
+  _type: "album";
   title: string;
-  slug: {
-    current: string;
-  };
+  slug: SanitySlug;
+  releaseDate: string;
+  coverArt?: SanityImage;
+  description?: SanityPortableText;
+}
+
+export interface MusicItem extends SanityDocument {
+  _type: "musicItem";
+  title: string;
+  slug: SanitySlug;
   releaseDate: string;
   album?: Album;
-  coverArt?: {
-    _type: "image";
-    asset: {
-      _ref: string;
-    };
-  };
+  coverArt?: SanityImage;
   category: "composition" | "performance" | "production" | "recording";
-  audioFile?: {
-    _type: "file";
-    asset: {
-      _ref: string;
-      url: string;
-    };
-  };
+  audioFile?: SanityFile;
   embedCode?: string;
-  description?: any[];
+  description?: SanityPortableText;
   instruments?: string[];
   collaborators?: Collaborator[];
   trackNumber?: number;
   featured: boolean;
+}
+
+// API Response Types
+export interface MusicResponse {
+  items: MusicItem[];
+  total: number;
+}
+
+export interface AlbumResponse {
+  album: Album;
+  tracks: MusicItem[];
+}
+
+// Query Result Types
+export interface MusicQueryResult {
+  musicItems: MusicItem[];
+  total: number;
+}
+
+export interface AlbumQueryResult {
+  album: Album;
+  tracks: MusicItem[];
 }

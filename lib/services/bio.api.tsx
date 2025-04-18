@@ -1,28 +1,28 @@
 import { sanityClient } from "../sanity/client";
-import { bioQuery } from "../sanity/queries";
-import { Bio } from "../../types/bio.types";
+import { artistQuery } from "../sanity/queries";
+import { Artist } from "../../types/music.types";
 
-export async function getBio(): Promise<Bio | null> {
-  return await sanityClient.fetch(bioQuery);
+export async function getBio(): Promise<Artist | null> {
+  return await sanityClient.fetch(artistQuery);
 }
 
-export async function updateBio(bio: Partial<Bio>): Promise<Bio | null> {
+export async function updateBio(bio: Partial<Artist>): Promise<Artist | null> {
   const { id, ...updateData } = bio;
 
   if (!id) {
-    throw new Error("Bio ID is required for update");
+    throw new Error("Artist ID is required for update");
   }
 
-  const updatedBio = await sanityClient.patch(id).set(updateData).commit();
+  const updatedArtist = await sanityClient.patch(id).set(updateData).commit();
 
   return {
-    id: updatedBio._id,
-    name: updatedBio.name,
-    title: updatedBio.title,
-    description: updatedBio.description,
-    image: updatedBio.image,
-    socialLinks: updatedBio.socialLinks,
-    skills: updatedBio.skills,
-    experience: updatedBio.experience,
+    id: updatedArtist._id,
+    name: updatedArtist.name,
+    title: updatedArtist.title,
+    description: updatedArtist.description,
+    image: updatedArtist.image,
+    socialLinks: updatedArtist.socialLinks,
+    skills: updatedArtist.skills,
+    experience: updatedArtist.experience,
   };
 }

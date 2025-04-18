@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { VisualEditing } from "next-sanity";
+import { draftMode } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,11 +13,13 @@ export const metadata: Metadata = {
   description: "A showcase of music, software development, and creative works.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const { isEnabled } = await draftMode();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -28,6 +32,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </div>
+        {isEnabled && <VisualEditing />}
       </body>
     </html>
   );

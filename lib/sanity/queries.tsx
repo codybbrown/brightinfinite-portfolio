@@ -10,6 +10,25 @@ export const audioTrackQuery = `*[_type == "audioTrack"] {
   }
 }`;
 
+export const artistQuery = `*[_type == "artist"][0] {
+  "id": _id,
+  name,
+  slug,
+  bio,
+  "photo": photo {
+    "url": asset->url,
+    "alt": alt
+  },
+  "instruments": instruments[]->{
+    "id": _id,
+    name
+  },
+  "genres": genres[]->{
+    "id": _id,
+    name
+  }
+}`;
+
 export const bioQuery = `*[_type == "bio"][0] {
   "id": _id,
   name,

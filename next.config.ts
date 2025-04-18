@@ -6,7 +6,13 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
         port: "",
-        pathname: "/**",
+        pathname: "/images/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        port: "",
+        pathname: "/files/**",
       },
       {
         protocol: "https",
@@ -15,6 +21,9 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+  },
+  experimental: {
+    serverActions: true,
   },
 };
 

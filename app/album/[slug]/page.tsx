@@ -9,13 +9,13 @@ import { TrackCard } from "@/components/TrackCard";
 import { urlFor } from "@/lib/sanity";
 
 interface AlbumPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function AlbumPage({ params }: AlbumPageProps) {
-  const slug = params.slug;
+  const { slug } = await params;
   const album = (await getAlbumBySlug(slug)) as Album | null;
 
   if (!album) {
@@ -23,7 +23,7 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
   }
 
   const albumCoverUrl = album.coverArt
-    ? urlFor(album.coverArt).url()
+    ? urlFor(album.coverArt).width(1024).height(1024).url()
     : "/images/placeholder-music.jpg";
 
   return (
@@ -35,8 +35,11 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
             src={albumCoverUrl}
             alt={album.title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover rounded-lg"
             priority
+            quality={90}
+            loading="eager"
           />
         </div>
         <div className="space-y-4">
