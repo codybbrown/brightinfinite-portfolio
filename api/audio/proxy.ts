@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const url = request.nextUrl.searchParams.get("url");
-
-  if (!url) {
-    return new NextResponse("Missing URL parameter", { status: 400 });
-  }
-
+export async function proxyAudio(url: string) {
   try {
     const response = await fetch(url);
 

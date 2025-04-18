@@ -89,7 +89,7 @@ export function WaveSurferPlayer({
         });
 
         // Create a proxy URL for the audio file to handle CORS
-        const proxyUrl = `/api/proxy-audio?url=${encodeURIComponent(audioFile.asset.url)}`;
+        const proxyUrl = `/api/audio?url=${encodeURIComponent(audioFile.asset.url)}`;
 
         await wavesurfer.load(proxyUrl);
 
